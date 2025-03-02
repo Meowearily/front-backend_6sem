@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import StyledButton from './components/Button/Button';
-
+import StyledCell from './components/Cell/Cell';
+import StyledDiv from './components/Div/Div';
 
 
 function Square({ value, onSquareClick }) {
   return (
-    <button className="square" onClick={onSquareClick}>
+    <StyledCell onClick={onSquareClick}>
       {value}
-    </button>
+    </StyledCell>
   );
 }
 
@@ -35,22 +36,22 @@ function Board({ xIsNext, squares, onPlay }) {
 
   return (
     <>
-      <div className="status">{status}</div>
-      <div className="board-row">
+      <StyledDiv className="status">{status}</StyledDiv>
+      <StyledDiv className="board-row">
         <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
         <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
         <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
-      </div>
-      <div className="board-row">
+      </StyledDiv>
+      <StyledDiv className="board-row">
         <Square value={squares[3]} onSquareClick={() => handleClick(3)} />
         <Square value={squares[4]} onSquareClick={() => handleClick(4)} />
         <Square value={squares[5]} onSquareClick={() => handleClick(5)} />
-      </div>
-      <div className="board-row">
+      </StyledDiv>
+      <StyledDiv className="board-row">
         <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
         <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
         <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
-      </div>
+      </StyledDiv>
     </>
   );
 }
@@ -87,14 +88,14 @@ export default function Game() {
   });
 
   return (
-    <div className="game">
-      <div className="game-board">
+    <StyledDiv className="game">
+      <StyledDiv className="game-board">
         <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
-      </div>
-      <div className="game-info">
+      </StyledDiv>
+      <StyledDiv className="game-info">
         <ol>{moves}</ol>
-      </div>
-    </div>
+      </StyledDiv>
+    </StyledDiv>
   );
 }
 

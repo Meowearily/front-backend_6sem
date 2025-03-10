@@ -30,6 +30,8 @@ function Board({ xIsNext, squares, onPlay }) {
   let status;
   if (winner) {
     status = 'Победил: ' + winner;
+  } else if (isDraw(squares)) {
+    status = 'Ничья';
   } else {
     status = 'Следующий ходит: ' + (xIsNext ? 'X' : 'O');
   }
@@ -119,3 +121,11 @@ function calculateWinner(squares) {
   return null;
 }
 
+function isDraw(squares) {
+  for (let i = 0; i < squares.length; i++) {
+    if (squares[i] != 'X' && squares[i] != 'O') {
+      return false;
+    }
+  }
+  return true;
+}

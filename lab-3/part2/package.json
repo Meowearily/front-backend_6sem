@@ -10,7 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "bootstrap": "^5.3.5",
     "i18next": "^24.2.2",
+    "i18next-intervalplural-postprocessor": "^3.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-i18next": "^15.4.1"

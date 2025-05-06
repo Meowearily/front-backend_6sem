@@ -1,12 +1,29 @@
 import { Button, Input, Textarea } from "@chakra-ui/react";
+import { useState } from "react";
 
-export default function CreateNoteForm() {
+export default function CreateNoteForm({ onCreate }) {
+  const [note, setNote] = useState();
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    setNotes(null);
+    onCreate(note);
+  };
+
     return (
-        <form className="w-full flex flex-col gap-3">
+        <form onSubmit={onSubmit} className="w-full flex flex-col gap-3">
           <h3 className="font-bold text-xl">Создание заметки</h3>
-          <Input placeholder="Название" />
-          <Textarea placeholder="Описание" />
-          <Button backgroundColor={"teal"}>Создать</Button>
+          <Input 
+            placeholder="Название" 
+            value={note?.title ?? ""}
+            onChange={(e) => setNote({ ...note, title: e.target.value })}
+          />
+          <Textarea
+            placeholder="Описание"
+            value={note?.description ?? ""}
+            onChange={(e) => setNote({ ...note, description: e.target.value })}
+          />
+          <Button type="submit" backgroundColor={"teal"}>Создать</Button>
         </form>
-    )
+    );
 }

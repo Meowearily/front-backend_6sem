@@ -9,16 +9,33 @@ import CreateNoteForm from "./components/CreateNoteForm";
 import Note from "./components/Note";
 import Filters from "./components/Filters";
 import { useEffect } from "react";
-import { fetchNotes } from "./services/notes";
+import { useState } from "react";
+import { fetchNotes, createNote } from "./services/notes";
 
 function App() {
+  const [notes, setNotes] = useState([]);
+  const [filter, setFilter] = useState({
+    search: "",
+    sortItem: "date",
+    sortOrder: "desc",
+  });
+
   useEffect(() => {
     const fetchData = async () => {
-      await fetchNotes();
+      let notes = await fetchNotes(filter);
+      setNotes(notes);
+
+      //console.log(notes);
     };
 
     fetchData();
-  }, []);
+  }, [filter]);
+
+  const onCreate = async (note) => {
+    await createNote(note);
+    let notes = await fetchNotes(filter);
+    setNotes(notes);
+  }
 
 
   return (
@@ -27,30 +44,20 @@ function App() {
         <CreateNoteForm />
         <div className="flex flex-col gap-5">
           <Input placeholder="Поиск" />
-          <Filters />
+          <Filters filter={filter} setFilter={setFilter} />
         </div>
       </div>
 
       <ul className="flex flex-col gap-5 w-1/2">
-        <li>
-          <Note />
-        </li>
-
-        <li>
-          <Note />
-        </li>
-
-        <li>
-          <Note />
-        </li>
-
-        <li>
-          <Note />
-        </li>
-
-        <li>
-          <Note />
-        </li>
+        {notes.map((n) => (
+          <li key={n.id}>
+            <Note
+              title={n.title}
+              description={n.description}
+              createdAt={n.createdAt}
+            />
+          </li>
+        ))}
 
       </ul>
       

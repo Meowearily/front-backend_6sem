@@ -1,4 +1,5 @@
 import { Button, CardBody, CardFooter, CardHeader, Heading, Input, Separator, Textarea, Card, Text } from "@chakra-ui/react";
+import moment from "moment/moment";
 
 export default function Note({ title, description, createdAt }) {
     return(

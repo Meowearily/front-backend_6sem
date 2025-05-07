@@ -1,24 +1,31 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addTodo, toggleComplete, deleteTodo } from "./todoSlice";
+import { addTodo, toggleComplete, deleteTodo, setFilter } from "./todoSlice";
 
 const Todo = () => {
     // Код компонента будет здесь
 
     const [text, setText] = useState("");
+    const [deadline, setDeadline] = useState("");
 
-    const todos = useSelector((state) => state.todos);
+    const todos = useSelector((state) => state.todos.todos);
+    const filter = useSelector((state) => state.todos.filter);
 
     const dispatch = useDispatch();
 
     const handleInputChange = (e) => {
         setText(e.target.value);
       };
+
+      const handleDeadlineChange = (e) => {
+        setDeadline(e.target.value);
+      };
       
       const handleAddTodo = () => {
         if (text) {
-          dispatch(addTodo(text));
+          dispatch(addTodo({ text, deadline }));
           setText("");
+          setDeadline("");
         }
       };
       
@@ -29,12 +36,22 @@ const Todo = () => {
       const handleDeleteTodo = (id) => {
         dispatch(deleteTodo(id));
       };
+
+      const handleFilterChange = (filter) => {
+        dispatch(setFilter(filter));
+      }
       
 
       return (
         <div>
-          <input type="text" value={text} onChange={handleInputChange} />{" "}
+          <input type="text" value={text} onChange={handleInputChange} placeholder="Add new todo" />{" "}
+          <input type="datatime-local" value={deadline} onChange={handleDeadlineChange} placeholder="Set deadline" />{" "}
           <button onClick={handleAddTodo}> Add Todo </button>{" "}
+          <div>
+            <button onClick={() => handleFilterChange("all")}>All</button>
+            <button onClick={() => handleFilterChange("active")}>Active</button>
+            <button onClick={() => handleFilterChange("completed")}>Completed</button>
+          </div>
           <ul>
             {" "}
             {todos.map((todo) => (
@@ -44,11 +61,10 @@ const Todo = () => {
                   textDecoration: todo.completed ? "line-through" : "none",
                 }}
               >
+                
                 {todo.text}{" "}
-                <button onClick={() => handleToggleComplete(todo.id)}>
-                  {" "}
-                  {todo.completed ? "Mark Incomplete" : "Mark Complete"}{" "}
-                </button>{" "}
+                {todo.deadline}{" "}
+                <input type="checkbox" checked={todo.completed} onChange={() => handleToggleComplete(todo.id)} />
                 <button onClick={() => handleDeleteTodo(todo.id)}> Delete </button>{" "}
               </li>
             ))}{" "}

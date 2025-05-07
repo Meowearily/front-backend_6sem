@@ -41,7 +41,7 @@ function App() {
   return (
     <section className="p-8 flex flex-row justify-start items-start gap-12">
       <div className="flex flex-col w-1/3 gap-10">
-        <CreateNoteForm />
+        <CreateNoteForm onCreate={onCreate}/>
         <div className="flex flex-col gap-5">
           <Input placeholder="Поиск" />
           <Filters filter={filter} setFilter={setFilter} />

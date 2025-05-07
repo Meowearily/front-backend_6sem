@@ -2,12 +2,12 @@ import { Button, Input, Textarea } from "@chakra-ui/react";
 import { useState } from "react";
 
 export default function CreateNoteForm({ onCreate }) {
-  const [note, setNote] = useState();
+  const [note, setNote] = useState({ title: "", description: "" });
 
   const onSubmit = (e) => {
     e.preventDefault();
-    setNotes(null);
     onCreate(note);
+    setNote({ title: "", description: "" });
   };
 
     return (

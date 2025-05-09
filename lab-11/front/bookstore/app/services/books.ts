@@ -21,21 +21,20 @@ export const createBook = async (bookrequest: BookRequest) => {
 };
 
 export const updateBook = async (id: string, bookRequest: BookRequest) => {
-    await fetch("https://localhost:7220/Book", {
+    await fetch(`https://localhost:7220/Book/${id}`, {
         method: "PUT",
         headers: {
             "content-type": "application/json",
         },
-        body: JSON.stringify({id, bookRequest}),
+        body: JSON.stringify(bookRequest),
     });
 };
 
 export const deleteBook = async (id: string) => {
-    await fetch("https://localhost:7220/Book", {
+    await fetch(`https://localhost:7220/Book/${id}`, {
         method: "DELETE",
         headers: {
             "content-type": "application/json",
         },
-        body: JSON.stringify(id),
     });
 };

@@ -75,7 +75,7 @@ export default function BooksPage() {
 
     return (
         <div>
-            <Button>Add book</Button>
+            <Button onClick={openModal}>Add book</Button>
 
             <CreateUpdateBooks
                 mode={mode}

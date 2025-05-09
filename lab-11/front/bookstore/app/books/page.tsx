@@ -7,6 +7,7 @@ import { BookRequest, createBook, getAllBooks, deleteBook, updateBook } from "..
 import Title from "antd/es/typography/Title";
 import { CreateUpdateBooks, Mode } from "../components/CreateUpdateBook";
 import { title } from "process";
+import '@ant-design/v5-patch-for-react-19';
 
 export default function BooksPage() {
     const defaultValues = {

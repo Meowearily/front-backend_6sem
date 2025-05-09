@@ -1,6 +1,7 @@
 import Card from "antd/es/card/Card"
 import { CardTitle } from "./Cardtitle";
 import Button from "antd/es/button/button";
+import '@ant-design/v5-patch-for-react-19';
 
 interface Props {
     books: Book[]

@@ -15,6 +15,7 @@ const todoSlice = createSlice({
           text: action.payload.text,
           completed: false,
           deadline: action.payload.deadline,
+          done: null,
         };
         state.todos.push(newTodo);
       },
@@ -23,6 +24,11 @@ const todoSlice = createSlice({
         const todo = state.todos.find((todo) => todo.id === action.payload);
         if (todo) {
           todo.completed = !todo.completed;
+          if (todo.completed) {
+            todo.done = new Date().toISOString();
+          } else {
+            todo.done = null;
+          }
         }
       },
       
